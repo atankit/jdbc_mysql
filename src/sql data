@@ -1,0 +1,224 @@
+
+                                STORED PROCEDURE
+    What is a Delimiter in MySQL?
+        Delimiter helps to create the stored procedure. It is a special character that we can use to end a MySQL
+        statement. This special character can be //, $$, @@, etc. It separates individual statements within a
+        larger script, query, or stored procedure, allowing MySQL to interpret and execute them correctly.
+
+    MySQL Stored Procedure
+        A stored procedure is a collection of pre-compiled SQL statements stored inside the database.
+        It is a subroutine or a subprogram in the regular computing language. A procedure always contains a name,
+        parameter lists, and SQL statements. We can invoke the procedures by using triggers, other procedures and
+        applications such as Java, Python, PHP, etc.
+
+    Advantages---
+         Stored Procedure increases the performance of the applications.
+         Stored procedure reduces the traffic between application and database server.
+         Stored procedures are reusable and transparent to any applications.
+         A procedure is always secure.
+
+    Parameters---
+         procedure_name --	It represents the name of the stored procedure.
+         parameter ---	It represents the number of parameters. It can be one or more than one.
+         Declaration_section --	It represents the declarations of all variables.
+         Executable_section --	It represents the code for the function execution.
+
+    MySQL procedure parameter has one of three modes:
+
+    IN parameter----
+          It is the default mode. It takes a parameter as input, such as an attribute.
+          When we define it, the calling program has to pass an argument to the stored procedure.
+          This parameter's value is always protected.
+
+    OUT parameters ---
+          It is used to pass a parameter as output. Its value can be changed inside the stored procedure,
+          and the changed (new) value is passed back to the calling program. It is noted that a procedure cannot
+          access the OUT parameter's initial value when it starts.
+
+    INOUT parameters---
+          It is a combination of IN and OUT parameters. It means the calling program can pass the argument,
+          and the procedure can modify the INOUT parameter, and then passes the new value back to the calling
+          program.
+
+// CREATE PROCEDURE -----> CREATE A TABLE
+      create procedure CreateDepartmentTbl()
+        begin
+        create table department(
+        depId int primary key auto_increment,
+        department_name varchar(200),
+        basic_salary int default 0,
+        bonus int default 0,
+        total_salary int default 0,
+        acc_count int default 0,
+        user_id int,
+        foreign key (user_id) references users(uId)
+      );
+        end //
+
+
+//   CREATE PROCEDURE ----> INSERT
+        delimiter //
+        create procedure InsertDepartment(
+        IN dname varchar(200),
+        IN basicsalary int,
+        IN bonus int,
+        IN userid int
+          )
+        begin
+        insert into department(department_name, basic_salary, bonus, user_id) values (dname, basicsalary, bonus,userid);
+        end //
+
+//   CREATE PROCEDURE ----> UPDATE
+
+          create  procedure updatedepart(
+                  IN didup int,
+          IN dnameup varchar(200),
+                  IN basicsalaryup int,
+          IN bonusup int,
+          IN useridup int
+  )
+          begin
+          Update department SET department_name = dnameup, basic_salary = basicsalaryup, bonus = bonusup , user_id = useridup  Where depId = didup;
+          end //
+
+ //   CREATE PROCEDURE -----> SELECT
+           create procedure SelectData()
+           begin
+           select * from department;
+           end //
+
+//     CREATE PROCEDURE ------> DELETE
+        create procedure ShowDepartmentNdDelete(
+           IN whereD_ID int
+         )
+         begin
+       select department_name from  department where depId = whereD_ID;
+       delete from department where depId = whereD_ID;
+       end //
+
+ //      CREATE PROCEDURE ------>Select info about user and depart using INNER Join
+             delimiter //
+             Create Procedure Select_users_depart_data()
+             begin
+             select u.uId, u.first_name, u.last_name, u.address, u.gender, d.department_name, d.basic_salary, d.bonus, d.total_salary, d.acc_count  from users u INNER JOIN department d ON u.uId = d.depId;
+      end //
+
+//      CREATE PROCEDURE ------>Search user and department data by department_name
+          Create Procedure Select_user_by_department(
+      -> IN departSr varchar(200)
+      -> )
+      -> begin
+                  ->  select u.uId, u.first_name, u.last_name, u.address, u.gender, d.department_name, d.basic_salary, d.bonus, d.total_salary, d.acc_count  from users u INNER JOIN department d ON u.uId = d.depId where department_name = departSr;
+      -> end //
+
+//  CREATE PROCEDURE ------> Joining three tables to retrieve a list of users along with their department and bankdetails
+         create procedure SelectByAllTbl()
+              begin
+              select u.uId, u.first_name, u.last_name, u.address, u.gender,d.department_name, d.basic_salary, d.total_salary,  b.bankName, b.accountNo, b.phoneNo from users u INNER JOIN department d ON u.uId = d.depId INNER JOIN bankdetails b ON d.depId = b.depId;
+               end //
+
+//  CREATE PROCEDURE ------> updates data in three related tables
+  CREATE  PROCEDURE Update_all_tables(
+                IN uidup int,
+        IN fnameup varchar(200),
+                IN lnameup varchar(200),
+                IN addressup varchar(200),
+                IN genderup varchar(100),
+                IN depidup int,
+        In departnameup varchar(200),
+                IN basicsalup int,
+        IN bounsup int,
+        IN useridup int,
+        IN bankidup int,
+        IN banknup varchar(200),
+                IN accountnoup int,
+        IN phonenoup int,
+        IN departidup int
+)
+        BEGIN
+        Update users Set first_name = fnameup, last_name =lnameup , address = addressup , gender =genderup where uId = uidup;
+        update department Set department_name = departnameup, basic_salary =basicsalup ,bonus = bounsup , user_id = useridup  where depId = depidup ;
+        update bankdetails Set bankName = banknup , accountNo = accountnoup  , phoneNo =phonenoup  , depId = departidup Where bId = bankidup;
+        END //
+
+//    CREATE PROCEDURE -----> delete records from User, Department and BankDetails related tables that use foreign keys.
+
+        CREATE PROCEDURE Delete_rowAll_tables(
+         IN same_id int               -- all three tables must be same id's.
+        )
+        begin
+        select u.uId, u.first_name, u.last_name, d.department_name, b.phoneNo
+        from users u INNER JOIN department d ON u.uId = d.depId INNER JOIN bankdetails b ON d.depId = b.depId
+        Where u.uId = same_id;        -- msg
+
+        SET foreign_key_checks = 0;    -- to prevent constraint issur during deletion.
+        Delete From users Where uId =same_id;
+        Delete From department Where depId = same_id;
+        Delete From bankdetails Where bId = same_id;
+        SET foreign_key_checks = 1;
+        end //
+
+ //    CREATE PROCEDURE -----> Fetch all 3 tables data search by bank name
+         Search By Bank provides Users, department and bank details
+         CREATE PROCEDURE SearchByBankName(
+                 IN search_bank_name varchar(100)
+         )
+         begin
+         select u.uId, u.first_name, u.last_name, u.address, u.gender,
+                 d.department_name, d.basic_salary, d.total_salary,
+                 b.bankName, b.accountNo, b.phoneNo
+         from users u INNER JOIN department d ON u.uId = d.depId INNER JOIN bankdetails b ON d.depId = b.depId
+         Where b.bankName = search_bank_name ;
+         end //
+
+
+ ----------------------------------------------------------------------------------------------------
+ MySQL Trigger
+ A trigger in MySQL is a set of SQL statements that reside in a system catalog. It is a special type of stored
+  procedure that is invoked automatically in response to an event. Each trigger is associated with a table,
+  which is activated on any DML statement such as INSERT, UPDATE, or DELETE.
+ Create a MySql trigger that calculates the total_salary before inserting a new row into the table.
+
+ Types of Triggers in MySQL?
+ We can define the maximum six types of actions or events in the form of triggers:
+
+ Before Insert: It is activated before the insertion of data into the table.
+ After Insert: It is activated after the insertion of data into the table.
+ Before Update: It is activated before the update of data in the table.
+ After Update: It is activated after the update of the data in the table.
+ Before Delete: It is activated before the data is removed from the table.
+ After Delete: It is activated after the deletion of data from the table.
+
+ mysql> delimiter //
+ mysql> create trigger before_insert_department
+     -> before insert On department     // specifies that this trigger is activated before an insert operation
+                                           on d department tbl.
+     ->  for each row                   // indicates that trigger will be executed for each row being inserted.
+     -> begin
+     -> Set NEW.total_salary = NEW.basic_salary + NEW.bonus;  // 10k(bsalary) + 1000(bonus) = 11k total_salary
+     -> end //
+
+
+ Create a MySql trigger that update the total_salary before updating a row.
+
+ mysql> create trigger before_update_department
+     -> before update                    // trigger is activated before an insert operation on the department
+     -> On department for each row
+     -> begin
+     -> Set NEW.total_salary = NEW.basic_salary + NEW.bonus;
+     -> end //
+ Query OK, 0 rows affected (0.13 sec)
+
+   //  Mysql trigger that update the acc_count in the department tbl whenever a new row is inserted into
+   bankdetails table
+
+ mysql> create trigger befor_open_bankdetails
+     -> before insert On bankdetails    // spcf that this trigger is activated after an insert operation on the
+                                       //   bankdetails tbl.
+     -> for each row
+     -> begin
+     -> update department set acc_count = acc_count + 1 Where depId = NEW.depId;
+                              // incr the acc_count in the department by 1 for the department corresponding
+                              // to the newly inserted bankdetail's depId
+     -> end /
+
