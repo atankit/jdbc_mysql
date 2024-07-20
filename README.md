@@ -193,6 +193,7 @@ public class InsertBySP {
 }
 ```
 3. Updating table
+```java
 package department;
 public class UpdateTbl {
     public static void main(String[] args) {
