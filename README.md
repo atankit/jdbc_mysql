@@ -141,7 +141,7 @@ public class ConnectionProvider {
 }
 ```
 ###### 2. CRUD Operations Using JDBC
- 1.  Create new table (department) with the help of MySQL stored procedure
+ 1.  Create new table (department) with the help of MySQL stored procedure --
 ```java
 public class createTblSP {
     public static void main(String[] args) {
@@ -159,7 +159,7 @@ public class createTblSP {
     }
 }
 ```
-2. Inserting data
+2. Inserting data --
 ```java
 package department;
 public class InsertBySP {
@@ -192,7 +192,7 @@ public class InsertBySP {
     }
 }
 ```
-3. Updating table
+3. Updating table --
 ```java
 package department;
 public class UpdateTbl {
@@ -235,7 +235,8 @@ public class UpdateTbl {
     }
 }
 ```
-4. Deleting table
+4. Deleting table --
+   ```java   
 package department;
 import ConnectionHelper.ConnectionProvider;
 public class DeleteDepart {
@@ -270,7 +271,7 @@ public class DeleteDepart {
 }
 ```
 
-##### Showing table
+##### Showing table --
 ```java
 package department;
 public class SelectUserDepartData {
