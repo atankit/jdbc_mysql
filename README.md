@@ -236,9 +236,8 @@ public class UpdateTbl {
 }
 ```
 4. Deleting table --
-   ```java   
+```java   
 package department;
-import ConnectionHelper.ConnectionProvider;
 public class DeleteDepart {
     public static void main(String[] args) {
        Connection connection = ConnectionProvider.getConnection();
