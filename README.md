@@ -42,7 +42,7 @@
       );
         end //
 
-  create procedureE CreateBankDetailsTbl()
+  create procedure CreateBankDetailsTbl()
       begin
       create table bankdetails(
       bId int primary key auto_increment,
