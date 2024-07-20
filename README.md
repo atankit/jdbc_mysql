@@ -122,10 +122,8 @@
 
 ##### Database Configuration
 1. Database Configuration & JDBC Utility Class
+   
 ```java
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
 public class ConnectionProvider {
     private static Connection connection;
     public static Connection getConnection(){
