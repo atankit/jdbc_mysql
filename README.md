@@ -92,7 +92,7 @@
            delete from department where depId = whereD_ID;
            end //
 ```
-        Select info about users and departs using INNER Join
+##### Select info about users and departs using INNER Join
   ```sql 
            delimiter //
       Create Procedure Select_users_depart_data()
