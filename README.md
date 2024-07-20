@@ -53,7 +53,7 @@
       foreign key (depId) references department(depId)
     );
       end //
-
+```
 ### Step 2: Creating Stored Procedures
 #### Stored Procedures for CRUD Operations.
 ```sql
