@@ -17,17 +17,15 @@
 
 ```sql
   delimiter //
-      create procedure CreateDepartmentTbl()
+      create procedure CreateUsersTbl()
         begin
-        create table department(
-        depId int primary key auto_increment,
-        department_name varchar(200),
-        basic_salary int default 0,
-        bonus int default 0,
-        total_salary int default 0,
-        acc_count int default 0,
-        user_id int,
-        foreign key (user_id) references users(uId)
+        create table users(
+        uId int primary key auto_increment,
+        first_name varchar(200) not null,
+        last_name varchar(200) not null,
+        address varchar(200),
+        gender varchar(50))
       );
         end //
+
 
