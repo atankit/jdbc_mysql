@@ -270,7 +270,7 @@ public class DeleteDepart {
 }
 ```
 
-##### Showing table --
+5. Showing table --
 ```java
 package department;
 public class SelectUserDepartData {
@@ -302,7 +302,7 @@ public class SelectUserDepartData {
     }
 }
 ```
-###Conclusion
-####This project demonstrates how to set up a MySQL database with stored procedures and triggers, and how to interact with it from a Java application using JDBC. By encapsulating the business logic within the database and leveraging JDBC for database operations, you can build robust and maintainable applications.
+### Conclusion
+#### This project demonstrates how to set up a MySQL database with stored procedures and triggers, and how to interact with it from a Java application using JDBC. By encapsulating the business logic within the database and leveraging JDBC for database operations, you can build robust and maintainable applications.
 
 
