@@ -121,7 +121,7 @@
 #### Java Application to Interact with MySQL
 
 ##### Database Configuration
-1. Database Configuration & JDBC Utility Class
+###### 1. Database Configuration & JDBC Utility Class
    
 ```java
 public class ConnectionProvider {
@@ -140,7 +140,7 @@ public class ConnectionProvider {
     }
 }
 ```
-2. CRUD Operations Using JDBC
+###### 2. CRUD Operations Using JDBC
  1.  Create new table (department) with the help of MySQL stored procedure
 ```java
 public class createTblSP {
