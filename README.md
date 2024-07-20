@@ -141,15 +141,8 @@ public class ConnectionProvider {
 }
 ```
 2. CRUD Operations Using JDBC
-   create new table (department) with the help of MySQL stored procedure
-   ```java
-   package department;
-import ConnectionHelper.ConnectionProvider;
-
-import java.sql.CallableStatement;
-import java.sql.Connection;
-import java.sql.SQLException;
-
+ 1.  Create new table (department) with the help of MySQL stored procedure
+```java
 public class createTblSP {
     public static void main(String[] args) {
        Connection connection =  ConnectionProvider.getConnection();
@@ -165,18 +158,10 @@ public class createTblSP {
        }
     }
 }
-
-//  Inserting data 
+```
+2. Inserting data
+```java
 package department;
-import ConnectionHelper.ConnectionProvider;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.sql.CallableStatement;
-import java.sql.Connection;
-import java.sql.SQLException;
-
 public class InsertBySP {
     public static void main(String[] args) {
         Connection connection = ConnectionProvider.getConnection();
@@ -206,18 +191,9 @@ public class InsertBySP {
         }
     }
 }
-
-updating table
+```
+3. Updating table
 package department;
-import ConnectionHelper.ConnectionProvider;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.sql.CallableStatement;
-import java.sql.Connection;
-import java.sql.SQLException;
-
 public class UpdateTbl {
     public static void main(String[] args) {
         Connection connection = ConnectionProvider.getConnection();
@@ -257,19 +233,10 @@ public class UpdateTbl {
 
     }
 }
-
-Deleting table
+```
+4. Deleting table
 package department;
 import ConnectionHelper.ConnectionProvider;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.sql.CallableStatement;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
 public class DeleteDepart {
     public static void main(String[] args) {
        Connection connection = ConnectionProvider.getConnection();
@@ -305,15 +272,6 @@ public class DeleteDepart {
 ##### Showing table
 ```java
 package department;
-
-import ConnectionHelper.ConnectionProvider;
-
-import java.sql.CallableStatement;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
-
 public class SelectUserDepartData {
     public static void main(String[] args) {
         Connection connection = ConnectionProvider.getConnection();
