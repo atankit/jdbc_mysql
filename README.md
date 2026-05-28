@@ -18,7 +18,7 @@ This project demonstrates the integration of MySQL database concepts with a Java
    - bank_details – Stores user banking information.
 
 ### Stored Procedures-
-    Stored procedures are implemented for:
+ Stored procedures are implemented for:
     - Insert user
     - Update user
     - Delete user
@@ -40,10 +40,10 @@ A Java application is developed using JDBC to:
     - Handle exceptions and manage resources.
 
 ### Key Features-
-     - Structured relational database design
-     - Efficient use of stored procedures
-     - Automation using triggers
-     - Real-time database interaction using Java
+   - Structured relational database design
+   - Efficient use of stored procedures
+   - Automation using triggers
+   - Real-time database interaction using Java
 
 ### Learning Outcome-
   + Understanding of MySQL schema design.
